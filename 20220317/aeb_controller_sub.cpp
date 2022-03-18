@@ -7,15 +7,15 @@
 
 std_msgs::Bool flag_AEB;
 
-void UltarSonarCallback_Range(const sensor_msgs::Range::ConstPtr& msg)
+void UltraSonarCallback_Range(const sensor_msgs::Range::ConstPtr& msg1)
 {
-	ROS_INFO("Soner Seq: [%d]", msg->header.seq);
-	ROS_INFO("Soner Range: [%f]", msg->range);	
+	ROS_INFO("Soner Seq: [%d]", msg1->header.seq);
+	ROS_INFO("Soner Range: [%f]", msg1->range);	
 }
 
-void UltraSonarCallback_Bool(const std_msgs::Bools::ConstPtr& bool) 
+void UltraSonarCallback_Bool(const std_msgs::Bool::ConstPtr& msg2) 
 {
-	if(bool == true)
+	if(msg2->data == true)
 	{
 		ROS_INFO("AEB_Activated");
 		flag_AEB.data = true;
