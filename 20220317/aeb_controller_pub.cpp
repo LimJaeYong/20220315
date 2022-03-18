@@ -6,6 +6,7 @@
 #include "geometry_msgs/Twist.h"
 
 std_msgs::Bool flag_AEB;
+sensor_msgs::Range range;
 
 int main(int argc, char **argv) {
 	int count = 0;
@@ -16,13 +17,12 @@ int main(int argc, char **argv) {
 	ros::Publisher pub1 = n.advertise<std_msgs::Bool>("bool", 1000);
 	ros::Publisher pub2 = n.advertise<sensor_msgs::Range>("range", 1000);
 
-	if (sensor_msgs.Range <= 1.0)
-	{
-		flag_AEB = true;
+	if(range.range <= 1.0) {
+		flag_AEB.data = true;
 	}
 
 	else {
-		flag_AEB = false;
+		flag_AEB.data = false;
 	}
 
 	pub1.publish(flag_AEB);
@@ -35,4 +35,3 @@ int main(int argc, char **argv) {
 	}
 	return 0;
 }
-
