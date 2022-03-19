@@ -5,7 +5,7 @@
 #include "sensor_msgs/Range.h"
 #include "geometry_msgs/Twist.h"
 
-std_msgs::Bool flag_AEB;
+std_msgs::Bool msg;
 sensor_msgs::Range range;
 
 int main(int argc, char **argv) {
@@ -18,17 +18,16 @@ int main(int argc, char **argv) {
 	ros::Publisher pub2 = n.advertise<sensor_msgs::Range>("range", 1000);
 
 	if(range.range <= 1.0) {
-		flag_AEB.data = true;
+		msg.data = true;
 	}
 
 	else {
-		flag_AEB.data = false;
+		msg.data = false;
 	}
 
-	pub1.publish(flag_AEB);
 
 	while (ros::ok()) {
-		
+		pub1.publish(msg);
 		loop_rate.sleep();
 		ros::spinOnce();
 		++count;
